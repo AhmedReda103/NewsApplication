@@ -1,14 +1,19 @@
-package com.example.newsapplication
+package com.example.newsapplication.ui.news
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.newsapplication.NewsAdapter
+import com.example.newsapplication.R
 import com.example.newsapplication.api.ApiManager
 import com.example.newsapplication.api.Constants
-import com.example.newsapplication.model.ArticlesItem
+import com.example.newsapplication.model.Category
 import com.example.newsapplication.model.NewsResponse
 import com.example.newsapplication.model.SourcesItem
 import com.example.newsapplication.model.SourcesResponse
@@ -17,27 +22,45 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity() {
+class NewsFragment : Fragment() {
+
+    companion object {
+        fun getInstance(category: Category): NewsFragment {
+            val fragment = NewsFragment()
+            fragment.category = category
+            return fragment
+        }
+    }
+
+    lateinit var category: Category
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_news, container, false)
+    }
+
     lateinit var tabLayout: TabLayout
     lateinit var progressBar: ProgressBar
     lateinit var recyclerView: RecyclerView
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initViews()
         getNewsSources()
     }
 
     val adapter = NewsAdapter(null)
     private fun initViews() {
-        tabLayout = findViewById(R.id.tab_layout)
-        progressBar = findViewById(R.id.progress_bar)
-        recyclerView = findViewById(R.id.recycler_view)
+        tabLayout = requireView().findViewById(R.id.tab_layout)
+        progressBar = requireView().findViewById(R.id.progress_bar)
+        recyclerView = requireView().findViewById(R.id.recycler_view)
         recyclerView.adapter = adapter
     }
 
     private fun getNewsSources() {
-        ApiManager.getApis().getSources(Constants.apiKey, "")
+        ApiManager.getApis().getSources(Constants.apiKey, category.id)
             .enqueue(object : Callback<SourcesResponse> {
                 override fun onResponse(
                     call: Call<SourcesResponse>,
