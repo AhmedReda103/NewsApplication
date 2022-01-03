@@ -1,4 +1,4 @@
-package com.example.newsapplication.ui
+package com.example.newsapplication.ui.home
 
 import android.os.Bundle
 import android.view.View
@@ -8,7 +8,8 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.newsapplication.R
-import com.example.newsapplication.model.Category
+import com.example.newsapplication.ui.SettingsFragment
+import com.example.newsapplication.ui.categories.Category
 import com.example.newsapplication.ui.categories.CategoriesFragment
 import com.example.newsapplication.ui.news.NewsFragment
 
@@ -65,7 +66,6 @@ class HomeActivity : AppCompatActivity() {
             fragmentTransaction.addToBackStack("")
         fragmentTransaction.commit()
         drawerLayout.close()
-
 
     }
 }

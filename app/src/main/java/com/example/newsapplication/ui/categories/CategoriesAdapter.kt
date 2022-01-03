@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapplication.R
-import com.example.newsapplication.model.Category
 import com.google.android.material.card.MaterialCardView
 
 class CategoriesAdapter(val categories: List<Category>) :

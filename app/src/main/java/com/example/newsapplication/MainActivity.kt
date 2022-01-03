@@ -8,10 +8,10 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapplication.api.ApiManager
 import com.example.newsapplication.api.Constants
-import com.example.newsapplication.model.ArticlesItem
 import com.example.newsapplication.model.NewsResponse
 import com.example.newsapplication.model.SourcesItem
 import com.example.newsapplication.model.SourcesResponse
+import com.example.newsapplication.ui.news.NewsAdapter
 import com.google.android.material.tabs.TabLayout
 import retrofit2.Call
 import retrofit2.Callback

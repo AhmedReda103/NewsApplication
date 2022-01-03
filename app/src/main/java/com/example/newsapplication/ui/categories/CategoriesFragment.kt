@@ -1,7 +1,5 @@
 package com.example.newsapplication.ui.categories
 
-import android.graphics.Color.blue
-import android.graphics.Color.red
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapplication.R
-import com.example.newsapplication.model.Category
 
 class CategoriesFragment : Fragment() {
 
