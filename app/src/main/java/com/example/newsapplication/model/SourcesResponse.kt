@@ -2,20 +2,21 @@ package com.example.newsapplication.model
 
 import com.google.gson.annotations.SerializedName
 
+//class to represent data come from api
 data class SourcesResponse(
 
-	@field:SerializedName("sources")
-	val sources: List<SourcesItem?>? = null,
+    @field:SerializedName("sources")
+    val sources: List<SourcesItem?>? = null,
 
-	@field:SerializedName("status")
-	val status: String? = null,
+    @field:SerializedName("status")
+    val status: String? = null,
 
-	//incase api failed
-	@field:SerializedName("code")
-	val code: List<ArticlesItem?>? = null,
+    //incase api failed
+    @field:SerializedName("code")
+    val code: List<ArticlesItem?>? = null,
 
-	@field:SerializedName("message")
-	val message: String? = null
+    @field:SerializedName("message")
+    val message: String? = null
 )
 
 data class SourcesItem(

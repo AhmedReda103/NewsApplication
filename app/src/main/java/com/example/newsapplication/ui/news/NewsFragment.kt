@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.core.view.isVisible
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapplication.R
 import com.example.newsapplication.api.ApiManager
 import com.example.newsapplication.api.Constants
+import com.example.newsapplication.databinding.FragmentNewsBinding
 import com.example.newsapplication.ui.categories.Category
 import com.example.newsapplication.model.NewsResponse
 import com.example.newsapplication.model.SourcesItem
@@ -25,6 +27,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class NewsFragment : Fragment() {
+
+
+    lateinit var viewDataBinding: FragmentNewsBinding
 
     companion object {
         fun getInstance(category: Category): NewsFragment {
@@ -41,12 +46,15 @@ class NewsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_news, container, false)
+        // return inflater.inflate(R.layout.fragment_news, container, false)
+        viewDataBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_news, container, false)
+        return viewDataBinding.root
     }
 
-    lateinit var tabLayout: TabLayout
-    lateinit var progressBar: ProgressBar
-    lateinit var recyclerView: RecyclerView
+    //    lateinit var tabLayout: TabLayout
+//    lateinit var progressBar: ProgressBar
+//    lateinit var recyclerView: RecyclerView
     lateinit var viewModel: NewsViewModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,8 +70,16 @@ class NewsFragment : Fragment() {
 //                 progressBar.visibility=View.VISIBLE
 //             else
 //                 progressBar.visibility=View.GONE
-            progressBar.isVisible = isVisible
+            //progressBar.isVisible = isVisible
+            viewDataBinding.progressBar.isVisible = isVisible
         })
+
+//        viewModel.sourcesLiveData.observe(viewLifecycleOwner, object : Observer<List<SourcesItem?>?> {
+//            override fun onChanged(t: List<SourcesItem?>?) {
+//                addSoursesToTabLayout(it)
+//            }
+//
+//       })
 
         viewModel.sourcesLiveData.observe(viewLifecycleOwner, Observer {
             addSoursesToTabLayout(it)
@@ -77,22 +93,23 @@ class NewsFragment : Fragment() {
 
     val adapter = NewsAdapter(null)
     fun initViews() {
-        tabLayout = requireView().findViewById(R.id.tab_layout)
-        progressBar = requireView().findViewById(R.id.progress_bar)
-        recyclerView = requireView().findViewById(R.id.recycler_view)
-        recyclerView.adapter = adapter
+//        tabLayout = requireView().findViewById(R.id.tab_layout)
+//        progressBar = requireView().findViewById(R.id.progress_bar)
+//        recyclerView = requireView().findViewById(R.id.recycler_view)
+        viewDataBinding.recyclerView.adapter = adapter
     }
 
     fun addSoursesToTabLayout(sources: List<SourcesItem?>?) {
 
         sources?.forEach {
-            val tab = tabLayout.newTab()
+            val tab = viewDataBinding.tabLayout.newTab()
             tab.setText(it?.name)
             tab.tag = it
-            tabLayout.addTab(tab)
+            viewDataBinding.tabLayout.addTab(tab)
         }
 
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        viewDataBinding.tabLayout.addOnTabSelectedListener(object :
+            TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 //     val source = sources?.get(tab?.position?:0)
                 val source = tab?.tag as SourcesItem

@@ -81,6 +81,8 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        tabLayout.getTabAt(0)?.select()
+
     }
 
     fun getNewsBySource(source: SourcesItem) {
