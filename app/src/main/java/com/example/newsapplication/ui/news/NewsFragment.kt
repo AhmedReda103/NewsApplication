@@ -14,7 +14,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapplication.R
-import com.example.newsapplication.api.ApiManager
 import com.example.newsapplication.api.Constants
 import com.example.newsapplication.databinding.FragmentNewsBinding
 import com.example.newsapplication.ui.categories.Category
@@ -22,10 +21,13 @@ import com.example.newsapplication.model.NewsResponse
 import com.example.newsapplication.model.SourcesItem
 import com.example.newsapplication.model.SourcesResponse
 import com.google.android.material.tabs.TabLayout
+import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class NewsFragment : Fragment() {
 
 
@@ -38,6 +40,9 @@ class NewsFragment : Fragment() {
             return fragment
         }
     }
+
+    @Inject
+    lateinit var adapter: NewsAdapter
 
     lateinit var category: Category
 
@@ -91,7 +96,7 @@ class NewsFragment : Fragment() {
 
     }
 
-    val adapter = NewsAdapter(null)
+
     fun initViews() {
 //        tabLayout = requireView().findViewById(R.id.tab_layout)
 //        progressBar = requireView().findViewById(R.id.progress_bar)

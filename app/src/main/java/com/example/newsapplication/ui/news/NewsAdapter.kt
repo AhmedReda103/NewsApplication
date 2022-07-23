@@ -12,7 +12,7 @@ import com.example.newsapplication.R
 import com.example.newsapplication.databinding.ItemNewsBinding
 import com.example.newsapplication.model.ArticlesItem
 
-class NewsAdapter(var items: List<ArticlesItem?>?) :
+class NewsAdapter(var items: List<ArticlesItem?>? = null) :
     RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
     class ViewHolder(val itemBinding: ItemNewsBinding) : RecyclerView.ViewHolder(itemBinding.root) {

@@ -12,7 +12,10 @@ import com.example.newsapplication.ui.SettingsFragment
 import com.example.newsapplication.ui.categories.Category
 import com.example.newsapplication.ui.categories.CategoriesFragment
 import com.example.newsapplication.ui.news.NewsFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
 
